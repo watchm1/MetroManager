@@ -31,5 +31,4 @@ void to_json(json& j, const Line& l)
 		j.at("ModelName").get_to(l.ModelName);
 		j.at("isActive").get_to(l.isActive);
 	}
-
 #endif
