@@ -1,9 +1,19 @@
 #include <iostream>
+#include <vector>
+#include "Models/Line.h"
+#include "Models/Subway.h"
+#include "Utils/JSONHelper.h"
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
-using namespace std;
-int main(int argc, char** argv) {
-	cout << "Hello World" << endl;
-	return 0;
-}
+int main() {
+  
+  
+  Line lineData;
+  NOSqlService<Line> lineService;
+  lineData.ModelUniqueID = "test1";
+  lineData.ModelName = "model 1";
+  lineData.isActive = 1;
+  Line newLine = lineService.WriteData("lines.txt", lineData);
+  std::cout << newLine.ModelName << std::endl;
+  
+  return 0;
+}                                  

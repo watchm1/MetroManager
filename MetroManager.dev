@@ -4,14 +4,14 @@ Name=MetroManager
 Type=1
 Ver=2
 ObjFiles=
-Includes="C:\Program Files\MySQL\MySQL Server 8.0\include";"C:\Program Files\MySQL\MySQL Server 8.0\include\mysql"
-Libs="C:\Program Files\MySQL\MySQL Server 8.0\lib"
+Includes=D:\CPPLibs\json\include
+Libs=
 PrivateResource=
 ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=-lmysql_@@_
+Linker=
 IsCpp=1
 Icon=
 ExeOutput=
@@ -28,8 +28,8 @@ Folders=LineManagment,Middlewares,Models,PanelManegement,Utils
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=1110000000000000000000000
-UnitCount=6
+CompilerSettings=1;0;1;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+UnitCount=8
 
 [VersionInfo]
 Major=1
@@ -81,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=Utils\SqlHelper.h
+FileName=Utils\JSONHelper.h
 CompileCpp=1
 Folder=Utils
 Compile=1
@@ -91,8 +91,8 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=Utils\SqlHelper.cpp
-Folder=Utils
+FileName=Models\Line.h
+Folder=Models
 Compile=1
 Link=1
 Priority=1000
@@ -100,12 +100,33 @@ OverrideBuildCmd=0
 BuildCmd=
 CompileCpp=1
 
-[Unit5]
-FileName=libmysql.dll
-Folder=
-Compile=0
-Link=0
+[Unit7]
+FileName=Models\Station.h
+CompileCpp=1
+Folder=Models
+Compile=1
+Link=1
 Priority=1000
-OverrideBuildCmd=1
-BuildCmd=<override this command>
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=Models\Subway.h
+CompileCpp=1
+Folder=Models
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=Models\BaseModel.h
+CompileCpp=1
+Folder=Models
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 

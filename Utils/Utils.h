@@ -5,14 +5,9 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-// this scripts will be about to drawing library
-// dynamicly drawing library
-
-//TODO(MuhammedAli#1#): Adding Middlewares About Input Check System
-//TODO(MuhammedAli#2#): Add opencv library and make draw algorithm 
-//TODO(MuhammedAli#3#): Making MetroManagment Controllers about dealing with Data Access Helper
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 using namespace std;
-
 class Utils {
 	private:
 		 // for id generator
@@ -20,6 +15,20 @@ class Utils {
 		
 		static string GenerateUniqueID();
 		static string ConvertIntToString(int value);
-		
+		template<typename T> static string ConvertToJson(T data);
+		template<typename T> static T ConvertFromJson(string data);
 };
+template<typename T>
+string Utils::ConvertToJson(T data)
+{
+	json jsonData = data;
+	string json_as_string = jsonData.dump();
+	return json_as_string;
+}
+template<typename T>	
+T Utils::ConvertFromJson(string data){
+	json from_string = json::parse(data);
+	auto TData = from_string.get<T>();
+	return TData;
+}
 #endif
