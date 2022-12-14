@@ -21,5 +21,5 @@ T NOSqlService<T>::WriteData(std::string fileName, T objectInstance)
 template<typename T>
 void NOSqlService<T>::ReadData(std::string fileName)
 {
-		
+	
 }
