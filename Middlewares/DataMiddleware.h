@@ -11,10 +11,18 @@
 class DataMiddleWare{
 	private:
 		NOSqlService<RootObject<Line>> lineService;
+		NOSqlService<RootObject<Subway>> subwayService;
+		NOSqlService<RootObject<Station>> stationService;
 		Configurations configs;
 	public:
 		RootObject<Line> GetAllDataFromLines(); // +
 		bool WriteAll(RootObject<Line> lineRoot);
+		
+		RootObject<Subway> GetAllDataFromSubways();
+		bool WriteAllToSubway(RootObject<Subway> subwayRoot);
+		
+		RootObject<Station> GetAllDataFromStations();
+		bool WriteAllToStations(RootObject<Station> stationRoot);
 };
 
 #endif
