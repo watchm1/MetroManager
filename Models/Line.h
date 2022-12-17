@@ -4,15 +4,14 @@
 #include "BaseModel.h"
 #include <nlohmann/json.hpp>
 
-using json = nlohmann::json;
 struct Line : public BaseModel{
 	
 	int isActive;
 		
 };
-void to_json(json& j, const Line& l)
+inline void to_json(nlohmann::json& j, const Line& l)
 	{
-		j = json
+		j = nlohmann::json
 		{
 			{
 				"ModelUniqueID", l.ModelUniqueID
@@ -25,10 +24,10 @@ void to_json(json& j, const Line& l)
 			}
 		};
 	}
-	void from_json(const json& j, Line& l)
+inline void from_json(const nlohmann::json& j, Line& l)
 	{
-		j.at("ModelUniqueID").get_to(l.ModelUniqueID);
-		j.at("ModelName").get_to(l.ModelName);
-		j.at("isActive").get_to(l.isActive);
+		l.ModelUniqueID = j.at("ModelUniqueID");
+		l.ModelName = j.at("ModelName");
+		l.isActive = j.at("isActive");
 	}
 #endif

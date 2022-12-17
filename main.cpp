@@ -1,28 +1,29 @@
 #include <iostream>
 #include <vector>
-#include "Models/Line.h"
-#include "Models/Subway.h"
-#include "Utils/JSONHelper.h"
-#include "Utils/RootObjects.h"
+#include "Middlewares/DataMiddleware.h"
 int main() {
+  RootObject<Line> lineRoot;
+  Line example;
+  example.ModelUniqueID = "asdşalmsdas";
+  example.ModelName = "muhammed ali test 1";
+  example.isActive = 0;
   
+  Line example2;
+  example2.ModelUniqueID = "asdadadsas";
+  example2.ModelName = "muhammed ali test 2";
+  example2.isActive = 1;
   
-  Line lineData;
+  lineRoot.lists.push_back(example);
+  lineRoot.lists.push_back(example2);
   
-  NOSqlService<RootObject<Line>> lineService;
-  lineData.ModelUniqueID = "test1";
-  lineData.ModelName = "model 1";
-  lineData.isActive = 1;
-  
-  Line lineData2;
-  lineData2.ModelName = "model 2";
-  lineData2.ModelUniqueID = "test 2";
-  lineData2.isActive = 0;
+  DataMiddleWare middleware;
+  //middleware.WriteAll(lineRoot);  
+
+  //DataMiddleWare middleware;
   
   RootObject<Line> root;
-  root.lists.push_back(lineData); 
-  root.lists.push_back(lineData2);
-  lineService.WriteData("lines.txt", root);
   
+  root = middleware.GetAllDataFromLines();
+  std::cout << root.lists[0].ModelName << std::endl;
   return 0;
-}                                  
+}

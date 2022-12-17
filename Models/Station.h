@@ -11,4 +11,5 @@ struct Station : public BaseModel {
 	int locationX;
 	int locationY;
 	int is_active;
+};
 #endif

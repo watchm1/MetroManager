@@ -1,7 +1,7 @@
 #include "Utils.h"
 #include <iostream>
 
-string Utils::GenerateUniqueID()
+std::string Utils::GenerateUniqueID()
 {
 	std::string letters = "abcdefghijklmnopqrstuvwxyz";
 	std::string numbers = "1234567890";
@@ -23,9 +23,9 @@ string Utils::GenerateUniqueID()
 	return UniqueID;	
 }
 
-string Utils::ConvertIntToString(int value)
+std::string Utils::ConvertIntToString(int value)
 {
-	stringstream ss;
+	std::stringstream ss;
 	ss << value;
 	return ss.str();
 } 
