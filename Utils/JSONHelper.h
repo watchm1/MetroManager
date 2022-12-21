@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include "Utils.h"
+
 template<typename T>
 class NOSqlService {
 	private:
@@ -46,7 +47,14 @@ T NOSqlService<T>::ReadData(std::string fileName)
 		}
 		auto convertedVal = std::string((std::istreambuf_iterator<char>(reader)), std::istreambuf_iterator<char>());
 		reader.close();
+		
 		return Utils::ConvertFromJson<T>(convertedVal);
+		
+	}
+	else 
+	{
+		T newVariable;
+		return newVariable;
 	}
 }
 template<typename T>

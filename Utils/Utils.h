@@ -28,8 +28,11 @@ std::string Utils::ConvertToJson(T data)
 template<typename T>	
 T Utils::ConvertFromJson(std::string data)
 {
+	T newData;
 	json from_string = json::parse(data);
-	auto TData = from_string.get<T>();
-	return TData;
+	auto TData = from_string.is_null() ? newData : from_string.get<T>();
+	
+	
+	
 }
 #endif

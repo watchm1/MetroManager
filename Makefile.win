@@ -4,11 +4,11 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o
-LINKOBJ  = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o
+OBJ      = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o LineManagment/LineManagment.o PanelManegement/PanelManagment.o Middlewares/InputMiddleware.o
+LINKOBJ  = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o LineManagment/LineManagment.o PanelManegement/PanelManagment.o Middlewares/InputMiddleware.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc
-INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/CPPLibs/json/include"
-CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++" -I"C:/CPPLibs/json/include"
+INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"D:/CPPLibs/json/include"
+CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++" -I"D:/CPPLibs/json/include"
 BIN      = MetroManager.exe
 CXXFLAGS = $(CXXINCS) -std=c++11
 CFLAGS   = $(INCS) -std=c++11
@@ -35,3 +35,12 @@ Config/Config.o: Config/Config.cpp
 
 Middlewares/DataMiddleware.o: Middlewares/DataMiddleware.cpp
 	$(CPP) -c Middlewares/DataMiddleware.cpp -o Middlewares/DataMiddleware.o $(CXXFLAGS)
+
+LineManagment/LineManagment.o: LineManagment/LineManagment.cpp
+	$(CPP) -c LineManagment/LineManagment.cpp -o LineManagment/LineManagment.o $(CXXFLAGS)
+
+PanelManegement/PanelManagment.o: PanelManegement/PanelManagment.cpp
+	$(CPP) -c PanelManegement/PanelManagment.cpp -o PanelManegement/PanelManagment.o $(CXXFLAGS)
+
+Middlewares/InputMiddleware.o: Middlewares/InputMiddleware.cpp
+	$(CPP) -c Middlewares/InputMiddleware.cpp -o Middlewares/InputMiddleware.o $(CXXFLAGS)

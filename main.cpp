@@ -1,7 +1,8 @@
 #include <iostream>
-#include <vector>
-#include "Middlewares/DataMiddleware.h"
+#include "./PanelManegement/PanelManagment.h"
 int main() {
-  // will handle
+  
+  MainPanel mainPanel;
+  mainPanel.HandleOperation();
   return 0;
 }
