@@ -61,8 +61,7 @@ void MainPanel::MainMenu()
 
 void MainPanel::HandleOperation(){
 	this->PrintOptions();
-	while(1)
-	{
+	
 		this->selection = getch();
 		switch(this->selection)
 		{
@@ -71,18 +70,15 @@ void MainPanel::HandleOperation(){
 			case '2':
 				this->MainTheme();
 				this->MoveCursorPoint(18,6);
-				setlocale(LC_ALL, "Turkish");
 				if(this->manager.HatOlustur() || !this->manager.HatOlustur())
 				{
 					usleep(3 * this->delayAsMicroSecond);
 					this->HandleOperation();
-					getch();
 				}
 				
 				break;
 			case '3':
 				this->MainTheme();
-				setlocale(LC_ALL, "Turkish");
 				if(this->manager.BakimaAl() || !this->manager.BakimaAl())
 				{
 					usleep(3 * this->delayAsMicroSecond);
@@ -90,7 +86,6 @@ void MainPanel::HandleOperation(){
 				}
 				break;
 			case '4':
-				
 				this->HandleSettings();
 				break;
 			case '5':
@@ -101,7 +96,6 @@ void MainPanel::HandleOperation(){
 				break;				
 		}
 		this->HandleOperation();
-	}
 /*	switch(this->getInput())
 	{
 		case 0:
