@@ -8,6 +8,7 @@
 #include "..\Utils\JSONHelper.h"
 #include "..\Config\Config.h"
 #include "..\Middlewares\InputMiddleware.h"
+#include <windows.h>
 using namespace std;
 class LineManager{
 	private:
@@ -18,7 +19,7 @@ class LineManager{
 		NOSqlService<RootObject<Subway>> subwayService;
 		NOSqlService<RootObject<Station>> stationService;
 		
-		
+		HANDLE h;
 		// ROOT OBJECTS
 		RootObject<Line> rootLine;
 		RootObject<Station> rootStation;
@@ -31,5 +32,6 @@ class LineManager{
 		bool BakimaAl();
 		void HatDurumu(); 
 		void HatGorseli();
+		void HandleSpecificLine(int index, Line lineData);
 };
 

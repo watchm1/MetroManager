@@ -65,7 +65,10 @@ void MainPanel::HandleOperation(){
 		this->selection = getch();
 		switch(this->selection)
 		{
-			case '1':	
+			case '1':
+				this->manager.HatDurumu();
+				usleep(3 * this->delayAsMicroSecond);
+				this->HandleOperation();	
 				break;
 			case '2':
 				this->MainTheme();
@@ -95,7 +98,6 @@ void MainPanel::HandleOperation(){
 				exit(1);
 				break;				
 		}
-		this->HandleOperation();
 /*	switch(this->getInput())
 	{
 		case 0:

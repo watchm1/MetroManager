@@ -22,7 +22,23 @@ std::string Utils::GenerateUniqueID()
 	}
 	return UniqueID;	
 }
-
+bool Utils::ContainsInArray(int value, int arr[])
+{
+	for(int i = 0; i < sizeof(arr); i++)
+	{
+		if(arr[i] == value)
+		{
+			break;
+			return true;
+		}
+		else 
+		{
+			i++;
+		}
+	}
+	return false;
+	
+}
 std::string Utils::ConvertIntToString(int value)
 {
 	std::stringstream ss;

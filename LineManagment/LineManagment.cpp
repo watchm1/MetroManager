@@ -1,9 +1,11 @@
 #include "LineManagment.h"
-
+#include <conio.h>
 using namespace std; 
 
 LineManager::LineManager(){
 	this->GetAllData();
+	h = GetStdHandle(STD_OUTPUT_HANDLE);
+	
 }
 bool LineManager::HatOlustur()
 {
@@ -26,7 +28,7 @@ bool LineManager::HatOlustur()
 	{
 		Station newStation;
 		newStation.ModelUniqueID = Utils::GenerateUniqueID();
-		cout << " Durak Adi : ";
+		cout << endl << " Durak Adi : ";
 		cin >> newStation.ModelName;
 		newStation.LineUniqueID = newLine.ModelUniqueID;
 		newStation.extraLineID = "";
@@ -89,8 +91,53 @@ bool LineManager::BakimaAl() {
 void LineManager::HatDurumu()
 {
 	system("cls");
+	int selected = 0;
+	for(int i = 0 ; i < this->rootLine.lists.size(); i ++)
+	{
+		if(InputMiddleware::CheckAvaliableLine(this->rootLine.lists[i]))
+		{
+			SetConsoleTextAttribute(this->h,2); // green color
+		}
+		else {
+			SetConsoleTextAttribute(this->h, 4); // red color
+		}
+		cout<< "[" << i << "] " << "[" << this->rootLine.lists[i].ModelUniqueID  << "] - " << "[ " << this->rootLine.lists[i].ModelName << " ]" << endl;	
+	}
+	SetConsoleTextAttribute(this->h, 7);
+	cout << "Islem yapmak istediginiz hatti seciniz : " ;
+	cin >> selected;
+	if(selected < this->rootLine.lists.size())
+	{
+		this->HandleSpecificLine(selected, this->rootLine.lists[selected]);
+	}
 	
-	
+}
+
+void LineManager::HandleSpecificLine(int index, Line lineData)
+{
+	system("cls");
+	cout<< "[" << index << "] " << "[" << lineData.ModelUniqueID  << "] - " << "[ " << lineData.ModelName << " ]" << endl;
+	if(lineData.isActive == 1)
+	{
+		
+	}
+	else 
+	{
+		char selection;
+		cout << "Hatti tekrar aktiflestirmek ister misiniz? Y/N : " ;
+		cin >> selection;
+		switch(selection)
+		{
+			case 'y':
+				lineData.isActive = 1;
+				this->rootLine.lists[index] = lineData;
+				cout << "Basariyla aktiflestirildi... Ana menuye donuluyor..." << endl;
+				break;
+			case 'n':
+				this->HatDurumu();
+				break;
+		}
+	}
 }
 void LineManager::GetAllData()
 {
