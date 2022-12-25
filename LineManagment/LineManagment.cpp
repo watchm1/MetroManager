@@ -12,7 +12,6 @@ bool LineManager::HatOlustur()
 	string HatAdi;
 	string lineID;
 	int DurakSayisi;
-	
 	cout << "Hat ismi: ";
 	cin >> HatAdi;
 	cout << " \nDurak Sayisi: ";
@@ -22,9 +21,7 @@ bool LineManager::HatOlustur()
 	newLine.ModelUniqueID = Utils::GenerateUniqueID();
 	newLine.ModelName = HatAdi;
 	newLine.isActive = 1;
-	
 	this->rootLine.lists.push_back(newLine);
-	cout << rootLine.lists.size() << endl;
 	for(int i = 0; i < DurakSayisi ; i ++)
 	{
 		Station newStation;
@@ -93,9 +90,7 @@ void LineManager::HatDurumu()
 {
 	system("cls");
 	
-	// kullanacağın değişken lineHelper
-	//vector<Line> lines = lineHelper.GetAllData();
-	// bu şekilde tanımlama yaparak bunları ekrana bastırmaya çalış
+	
 }
 void LineManager::GetAllData()
 {
@@ -103,8 +98,9 @@ void LineManager::GetAllData()
 	this->rootLine = this->lineService.ReadData(this->config.GetPathOfLines());
 	this->rootStation = this->stationService.ReadData(this->config.GetPathOfStations());
 	this->rootSubway = this->subwayService.ReadData(this->config.GetPathOfSubways());
-	
-}
+	cout << "Hello world" << endl;
+	cout << rootLine.lists.size() << endl;
+}	
 void LineManager::SaveData()
 {
 	this->lineService.WriteData(this->config.GetPathOfLines(), this->rootLine);
