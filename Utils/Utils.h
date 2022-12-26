@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <vector>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -16,6 +17,7 @@ class Utils {
 		static std::string GenerateUniqueID();
 		static std::string ConvertIntToString(int value);
 		static bool ContainsInArray(int value, int arr[]);
+		static bool ContainsInVector(int value, std::vector<int> data);
 		template<typename T> static std::string ConvertToJson(T data);
 		template<typename T> static T ConvertFromJson(std::string data);
 

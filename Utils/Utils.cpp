@@ -28,8 +28,8 @@ bool Utils::ContainsInArray(int value, int arr[])
 	{
 		if(arr[i] == value)
 		{
-			break;
 			return true;
+			break;
 		}
 		else 
 		{
@@ -38,6 +38,17 @@ bool Utils::ContainsInArray(int value, int arr[])
 	}
 	return false;
 	
+}
+bool Utils::ContainsInVector(int value, std::vector<int> data)
+{
+	for(auto &element: data)
+	{
+		if(element == value)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 std::string Utils::ConvertIntToString(int value)
 {

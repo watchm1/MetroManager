@@ -16,7 +16,7 @@ using namespace std;
 
 class MainPanel {
 	private:
-		string MenuItem[6];
+		string MenuItem[7];
 		char selection;
 		string Color = "Default";
 		void HandleSettings();
@@ -27,6 +27,7 @@ class MainPanel {
 	    LineManager manager;
 	    unsigned int delayAsMicroSecond = 1000000;
 	    void MoveCursorPoint(short x, short y);
+		void AddNewSubway();
 		// line manager
 	public:
 		  void HandleOperation();

@@ -24,14 +24,21 @@ class LineManager{
 		RootObject<Line> rootLine;
 		RootObject<Station> rootStation;
 		RootObject<Subway> rootSubway;
+		void LineStatementMenu(Line lineData);
+		void ActiveStations(Line lineData);
+		void ActiveExpedition(Line lineData);
+		
+		void GetAllData();
+		void HandleSpecificLine(int index, Line lineData);
+		void AddExpedition(Line lineData);
+		void AddStation(Line lineData);
 	public:
 		void SaveData();
 		explicit LineManager();
-		void GetAllData();
 		bool HatOlustur();
 		bool BakimaAl();
 		void HatDurumu(); 
 		void HatGorseli();
-		void HandleSpecificLine(int index, Line lineData);
+		void AddNewSubwayPool(Subway subway);
 };
 

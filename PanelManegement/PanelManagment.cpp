@@ -46,10 +46,11 @@ void MainPanel::MainMenu()
 	this->MenuItem[0] = "[1] LINE STATEMENT";
 	this->MenuItem[1] = "[2] ADD LINE";
 	this->MenuItem[2] = "[3] REFACTOR LINE";
-	this->MenuItem[3] = "[4] SETTINGS";
-	this->MenuItem[4] = "[5] CLOCK INFORMATION";
-	this->MenuItem[5] = "[X] QUIT APPLICATION";
-	for(int menu = 0; menu <= 5; menu++)
+	this->MenuItem[3] = "[4] ADD NEW SUBWAY";
+	this->MenuItem[4] = "[5] SETTINGS";
+	this->MenuItem[5] = "[6] CLOCK INFORMATION";
+	this->MenuItem[6] = "[X] QUIT APPLICATION";
+	for(int menu = 0; menu <= 6; menu++)
 	{
 		this->MoveCursorPoint(20, 6+(menu*2));
 		cout << this->MenuItem[menu];
@@ -89,9 +90,14 @@ void MainPanel::HandleOperation(){
 				}
 				break;
 			case '4':
-				this->HandleSettings();
+				this->AddNewSubway();
+				usleep(3 * this->delayAsMicroSecond);
+				this->HandleOperation();
 				break;
 			case '5':
+				this->HandleSettings();
+				break;
+			case '6':
 				break;
 			case 'x':
 				this->manager.SaveData();
@@ -169,8 +175,27 @@ void MainPanel::HandleSettings()
 			this->Color = "WHITE";
 			break;
 	}
+	this->HandleOperation();
 }
-
+void MainPanel::AddNewSubway()
+{
+	system("cls");
+	Subway subway;
+	subway.ModelUniqueID = Utils::GenerateUniqueID();
+	cout << "Subway Name : ";
+	cin >> subway.ModelName;
+	cout << endl << "Carriage Count : ";
+	cin >> subway.CarriageCount;
+	cout << endl << "Max Mass: ";
+	cin >> subway.MaxMass;
+	subway.isActive = 0;
+	subway.currentExpeditionID = "";
+	subway.CurrentLineUniqueID = "";
+	
+	this->manager.AddNewSubwayPool(subway);
+	cout << endl << "ADDED SUCCESSFULLY... RETURNING TO THE MENU ";
+	
+}
 void MainPanel::MoveCursorPoint(short x, short y)
 {
 	COORD post = {x,y};
