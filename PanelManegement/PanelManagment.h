@@ -1,15 +1,5 @@
-#include <iostream>
-#include <string>
-#include <conio.h>
 #include "..\LineManagment\LineManagment.h"
-#include<unistd.h>
-#include <iomanip>
-#include <locale.h>
-#include <ctime>
-#include "windows.h"
-#include <fstream>
-#include <ctype.h>
-#include<unistd.h>
+
 
 
 using namespace std;

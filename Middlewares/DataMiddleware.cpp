@@ -1,5 +1,4 @@
 #include "DataMiddleware.h"
-#include <algorithm>
 
 
 RootObject<Line> DataMiddleWare::GetAllDataFromLines()

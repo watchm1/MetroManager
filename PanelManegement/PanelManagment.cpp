@@ -1,4 +1,15 @@
 #include "PanelManagment.h"
+#include <iostream>
+#include <string>
+#include <conio.h>
+#include<unistd.h>
+#include <iomanip>
+#include <locale.h>
+#include <ctime>
+#include <windows.h>
+#include <fstream>
+#include <ctype.h>
+#include<unistd.h>
 
 
 void MainPanel::PrintOptions(){
@@ -48,7 +59,7 @@ void MainPanel::MainMenu()
 	this->MenuItem[2] = "[3] REFACTOR LINE";
 	this->MenuItem[3] = "[4] ADD NEW SUBWAY";
 	this->MenuItem[4] = "[5] SETTINGS";
-	this->MenuItem[5] = "[6] CLOCK INFORMATION";
+	this->MenuItem[5] = "[6] ALL LINES WITH COORDINATES";
 	this->MenuItem[6] = "[X] QUIT APPLICATION";
 	for(int menu = 0; menu <= 6; menu++)
 	{
@@ -98,6 +109,8 @@ void MainPanel::HandleOperation(){
 				this->HandleSettings();
 				break;
 			case '6':
+				this->manager.DrawAllLinesInCoordinates();
+				usleep(3* this->delayAsMicroSecond);
 				break;
 			case 'x':
 				this->manager.SaveData();

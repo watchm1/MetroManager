@@ -1,5 +1,4 @@
-#include<string>
-#include <iostream>
+#include <windows.h>
 #include "..\Utils\Utils.h"
 #include "..\Models\Line.h"
 #include "..\Models\Station.h"
@@ -8,7 +7,6 @@
 #include "..\Utils\JSONHelper.h"
 #include "..\Config\Config.h"
 #include "..\Middlewares\InputMiddleware.h"
-#include <windows.h>
 using namespace std;
 class LineManager{
 	private:
@@ -39,6 +37,7 @@ class LineManager{
 		bool BakimaAl();
 		void HatDurumu(); 
 		void HatGorseli();
+		void DrawAllLinesInCoordinates();
 		void AddNewSubwayPool(Subway subway);
 };
 

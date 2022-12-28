@@ -1,11 +1,12 @@
 #include "LineManagment.h"
 #include <conio.h>
+#include<string>
+#include <iostream>
 using namespace std; 
 
 LineManager::LineManager(){
 	this->GetAllData();
 	h = GetStdHandle(STD_OUTPUT_HANDLE);
-	
 }
 bool LineManager::HatOlustur()
 {
@@ -86,6 +87,7 @@ bool LineManager::BakimaAl() {
 			return false;	
 		}
 	}
+	return false;
 }
 
 void LineManager::HatDurumu()
@@ -202,6 +204,7 @@ void LineManager::LineStatementMenu(Line lineData)
 	cout << "3) ADD EXPEDITIONS" << endl;
 	cout << "4) ADD STATIONS" << endl;
 	cout << "5) BACK TO MENU" << endl;
+	
 	char option = getch();
 	switch(option)
 	{
@@ -296,6 +299,10 @@ void LineManager::AddStation(Line lineData)
 void LineManager::AddNewSubwayPool(Subway subway)
 {
 	this->rootSubway.lists.push_back(subway);
+}
+void LineManager::DrawAllLinesInCoordinates()
+{
+	
 }
 void LineManager::GetAllData()
 {	

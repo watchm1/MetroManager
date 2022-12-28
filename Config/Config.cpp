@@ -7,6 +7,8 @@ Configurations::Configurations(){
 
 void Configurations::Initializer()
 {
+	this->WIDTH = 800;
+	this->HEIGHT = 600;
 	this->SubwayDataPath = "Config/Subways.json";
 	this->LineDataPath = "Config/Lines.json";
 	this->StationDataPath = "Config/Stations.json";

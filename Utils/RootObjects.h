@@ -1,3 +1,5 @@
+#ifndef ROOTOBJECTS_H
+#define ROOTOBJECTS_H
 #include <vector>
 #include <nlohmann/json.hpp>
 
@@ -23,3 +25,5 @@ inline void from_json(const nlohmann::json& j, RootObject<T>& obj)
 	obj.lists.resize(sj.size());
 	std::copy(sj.begin(), sj.end(), obj.lists.begin());
 }
+
+#endif

@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o LineManagment/LineManagment.o PanelManegement/PanelManagment.o Middlewares/InputMiddleware.o
-LINKOBJ  = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o LineManagment/LineManagment.o PanelManegement/PanelManagment.o Middlewares/InputMiddleware.o
+OBJ      = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o LineManagment/LineManagment.o PanelManegement/PanelManagment.o Middlewares/InputMiddleware.o Utils/GraphicHelper.o
+LINKOBJ  = main.o Utils/Utils.o Config/Config.o Middlewares/DataMiddleware.o LineManagment/LineManagment.o PanelManegement/PanelManagment.o Middlewares/InputMiddleware.o Utils/GraphicHelper.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"D:/CPPLibs/json/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++" -I"D:/CPPLibs/json/include"
@@ -44,3 +44,6 @@ PanelManegement/PanelManagment.o: PanelManegement/PanelManagment.cpp
 
 Middlewares/InputMiddleware.o: Middlewares/InputMiddleware.cpp
 	$(CPP) -c Middlewares/InputMiddleware.cpp -o Middlewares/InputMiddleware.o $(CXXFLAGS)
+
+Utils/GraphicHelper.o: Utils/GraphicHelper.cpp
+	$(CPP) -c Utils/GraphicHelper.cpp -o Utils/GraphicHelper.o $(CXXFLAGS)

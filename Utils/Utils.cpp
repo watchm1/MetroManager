@@ -24,7 +24,7 @@ std::string Utils::GenerateUniqueID()
 }
 bool Utils::ContainsInArray(int value, int arr[])
 {
-	for(int i = 0; i < sizeof(arr); i++)
+	for(int i = 0; i < sizeof(&arr); i++)
 	{
 		if(arr[i] == value)
 		{
