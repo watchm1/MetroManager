@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <stdio.h>
+#include <conio.h>
 #include <string>
 std::string GraphicHelper::exec(std::string command)
 {
@@ -28,6 +29,7 @@ void GraphicHelper::main()
 {
 	std::string gotoLocation = this->exec("start .\\Config\\Graphs\\draw.exe");
 	std::string run = this->exec("dir");
-	
+	system(run.c_str());
 	system("PAUSE");
+	getch();
 }

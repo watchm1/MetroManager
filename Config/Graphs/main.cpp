@@ -1,4 +1,4 @@
-#include "graphics.h"
+#include <graphics.h>
 #include "LineLocations.h"
 #include <iostream>
 #include <vector>
@@ -8,6 +8,7 @@
 #include <unistd.h>
 #pragma 
 using json = nlohmann::json;
+std::vector<colors> colors;
 const int WIDTH = 800, HEIGHT = 600;
 const int multiplier = 50;
 void DrawLine(int moveToX, int moveToY, int drawX, int drawY, int color, int textX, int textY, char* name)
@@ -15,8 +16,7 @@ void DrawLine(int moveToX, int moveToY, int drawX, int drawY, int color, int tex
 	moveto(moveToX, moveToY);
 	setcolor(color);
 	lineto(drawX, drawY);
-	outtextxy(textX, textY, name);
-	
+	outtextxy(textX, textY, name);	
 }
 bool ExistsFile(std::string fileName)
 {
@@ -74,52 +74,47 @@ RootObject<Line> ReadDataLine(std::string fileName)
 	}
 }
 
-void WriteLocations(std::string ID, RootObject<Station> stationData, int xZero, int yZero)
+void WriteLocations(std::string ID, std::string lineName,int color,RootObject<Station> stationData, int xZero, int yZero)
 {
-	std::vector<int> locationsX;
-	std::vector<int> locationsY;
-	for(auto &element : stationData.lists)
+	int oldX;
+	int oldY;
+	int currentXval = 0;
+	int currentYval = 0;
+	std::string value = "[ " + lineName + " ]";
+	for(int i = 0; i < stationData.lists.size(); i++)
 	{
-		locationsX.push_back(element.locationX);
-		locationsY.push_back(element.locationY);
-	}
-	for(int i = 0; i < locationsX.size(); i++)
-	{
-		std::cout << "Current X value => " << locationsX[i] << std::endl;
-		std::cout << "Current Y value => " << locationsY[i] << std::endl;
+		if(stationData.lists[i].LineUniqueID == ID)
+		{
+			if(i == 0)
+			{
+				oldX = xZero;
+				oldY = yZero;
+				currentXval = xZero + (stationData.lists[i].locationX * multiplier);
+				currentYval	= yZero - (stationData.lists[i].locationY * multiplier);
+			}
+			else if(i > 0)
+			{
+				oldX = stationData.lists[i-1].locationX * multiplier;
+				oldY = yZero - (stationData.lists[i-1].locationY * multiplier);
+				currentXval = stationData.lists[i].locationX * multiplier;
+				currentYval = yZero - stationData.lists[i].locationY * multiplier;
+			}
+			DrawLine(oldX, oldY, currentXval, currentYval, color, currentXval + 10, currentYval + 10,const_cast<char*>(stationData.lists[i].ModelName.c_str()));
+			sleep(1);
+		}
 		
-		int oldX;
-		int oldY;
-		oldX = 0;
-		oldY = 0;
-		int currentXval = 0;
-		int currentYval = 0;
-		if(i == 0)
-		{
-			oldX = xZero;
-			oldY = yZero;
-			currentXval = xZero + (locationsX[i] * multiplier);
-			currentYval	= yZero - (locationsY[i] * multiplier);
-		}
-		else if(i > 0)
-		{
-			oldX = locationsX[i-1] * multiplier;
-			oldY = yZero - (locationsY[i-1] * multiplier);
-			currentXval = locationsX[i] * multiplier;
-			currentYval = yZero - locationsY[i] * multiplier;
-		}
-		DrawLine(oldX, oldY, currentXval, currentYval, WHITE, currentXval + 10, currentYval + 10,const_cast<char*>(stationData.lists[i].ModelName.c_str()));
-		sleep(1);
-	}
-	
-	
+	}	
+	outtextxy(currentXval, currentYval - 60, const_cast<char*>(lineName.c_str()));
 }
-
 void VectorManipulation(RootObject<Line> lineData, RootObject<Station> stationData, int xZero, int yZero)
 {
+	
+	int counter = 0;
 	for(auto &element: lineData.lists)
 	{
-		WriteLocations(element.ModelUniqueID, stationData, xZero, yZero);
+		std::cout << counter;
+		WriteLocations(element.ModelUniqueID, element.ModelName,colors[counter],stationData, xZero, yZero);
+		counter++;
 	}
 }
 void DrawCoordinates(int xZero, int yZero)
@@ -131,6 +126,13 @@ void DrawCoordinates(int xZero, int yZero)
 }
 int main(int argc, char** argv)
 {
+	
+	colors.push_back(WHITE);
+	colors.push_back(GREEN);
+	colors.push_back(MAGENTA);
+	colors.push_back(BROWN);
+	colors.push_back(YELLOW);
+	colors.push_back(BLUE);
 	int xZero = 0;
 	int yZero = HEIGHT -10;
 	
@@ -143,5 +145,6 @@ int main(int argc, char** argv)
 	system("PAUSE");
 	closegraph();
 	
+	int array[15000];
 	return 0;
 }
