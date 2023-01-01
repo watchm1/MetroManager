@@ -33,11 +33,12 @@ class LineManager{
 	public:
 		void SaveData();
 		explicit LineManager();
-		bool HatOlustur();
-		bool BakimaAl();
+		void HatOlustur();
+		void BakimaAl();
 		void HatDurumu(); 
 		void HatGorseli();
 		void DrawAllLinesInCoordinates();
 		void AddNewSubwayPool(Subway subway);
+		
 };
 

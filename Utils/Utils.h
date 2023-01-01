@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <nlohmann/json.hpp>
+#include <windows.h>
 using json = nlohmann::json;
 
 class Utils {
@@ -20,7 +21,9 @@ class Utils {
 		static bool ContainsInVector(int value, std::vector<int> data);
 		template<typename T> static std::string ConvertToJson(T data);
 		template<typename T> static T ConvertFromJson(std::string data);
-
+		static void MoveCursorPoint(short x, short y);
+		static void ChangeColor(HANDLE h,int color);
+		static std::string CurrentDateTime();
 };
 template<typename T>
 std::string Utils::ConvertToJson(T data)

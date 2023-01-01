@@ -16,7 +16,7 @@ class MainPanel {
 	    int getInput(); 
 	    LineManager manager;
 	    unsigned int delayAsMicroSecond = 1000000;
-	    void MoveCursorPoint(short x, short y);
+	    
 		void AddNewSubway();
 		// line manager
 	public:

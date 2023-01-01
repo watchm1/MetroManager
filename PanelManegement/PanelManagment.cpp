@@ -23,32 +23,32 @@ void MainPanel::MainTheme()
 	system("cls");
 	time_t now = time(0);
 	cout << ctime(&now) << endl;
-	this->MoveCursorPoint(57,0);
+	Utils::MoveCursorPoint(57,0);
 	cout << "Console Color: " + this->Color;
-	this->MoveCursorPoint(30,3);
+	Utils::MoveCursorPoint(30,3);
 	cout << "METRO MANAGMENT SYSTEM" << endl;
-	this->MoveCursorPoint(15,4);
+	Utils::MoveCursorPoint(15,4);
 	cout.width(50);
 	cout.fill('=');
 	cout << " ";
-	
 	for(int y = 3; y < 20; y++)
 	{
-		this->MoveCursorPoint(15,y);
+		Utils::MoveCursorPoint(15,y);
 		cout << "|";
-		this->MoveCursorPoint(64,y);
+		Utils::MoveCursorPoint(64,y);
 		cout << "|";
 	}
 	for(int x=15; x < 65; x++)
 	{
-		this->MoveCursorPoint(x, 20);
+		Utils::MoveCursorPoint(x, 20);
 		cout << "+";
 	}
 	for(int x = 16; x< 64; x++)
 	{
-		this->MoveCursorPoint(x,18);
+		Utils::MoveCursorPoint(x,18);
 		cout << "=";
 	}
+	Utils::MoveCursorPoint(33, 19);
 }
 
 
@@ -63,12 +63,12 @@ void MainPanel::MainMenu()
 	this->MenuItem[6] = "[X] QUIT APPLICATION";
 	for(int menu = 0; menu <= 6; menu++)
 	{
-		this->MoveCursorPoint(20, 6+(menu*2));
+		Utils::MoveCursorPoint(20, 6+(menu*2));
 		cout << this->MenuItem[menu];
 	}
-	this->MoveCursorPoint(15,22);
+	Utils::MoveCursorPoint(15,22);
 	cout << "Yapmak istediginiz islemi seciniz:[]";
-	this->MoveCursorPoint(50,22);
+	Utils::MoveCursorPoint(50,22);
 }
 
 void MainPanel::HandleOperation(){
@@ -78,27 +78,24 @@ void MainPanel::HandleOperation(){
 		switch(this->selection)
 		{
 			case '1':
+				this->MainTheme();
 				this->manager.HatDurumu();
 				usleep(3 * this->delayAsMicroSecond);
 				this->HandleOperation();	
 				break;
 			case '2':
-				this->MainTheme();
-				this->MoveCursorPoint(18,6);
-				if(this->manager.HatOlustur() || !this->manager.HatOlustur())
-				{
-					usleep(3 * this->delayAsMicroSecond);
-					this->HandleOperation();
-				}
+				this->manager.HatOlustur();
+				Utils::MoveCursorPoint(18,6);
+				usleep(3 * this->delayAsMicroSecond);
+				this->HandleOperation();
+				
 				
 				break;
 			case '3':
 				this->MainTheme();
-				if(this->manager.BakimaAl() || !this->manager.BakimaAl())
-				{
-					usleep(3 * this->delayAsMicroSecond);
-					this->HandleOperation();
-				}
+				this->manager.BakimaAl();
+				usleep(3 * this->delayAsMicroSecond);
+				this->HandleOperation();
 				break;
 			case '4':
 				this->AddNewSubway();
@@ -166,12 +163,12 @@ void MainPanel::HandleSettings()
 	
 	for(int menu = 0; menu <= 4; menu++)
 	{
-		this->MoveCursorPoint(20, 6+(menu*2));
+		Utils::MoveCursorPoint(20, 6+(menu*2));
 		cout << this->MenuItem[menu];
 	}
-	this->MoveCursorPoint(15,22);
+	Utils::MoveCursorPoint(15,22);
 	cout << "Yapmak istediginiz islemi seciniz:[ ]";
-	this->MoveCursorPoint(50,22);
+	Utils::MoveCursorPoint(50,22);
 	colorCode = getch();
 	switch(colorCode)
 	{
@@ -209,8 +206,4 @@ void MainPanel::AddNewSubway()
 	cout << endl << "ADDED SUCCESSFULLY... RETURNING TO THE MENU ";
 	
 }
-void MainPanel::MoveCursorPoint(short x, short y)
-{
-	COORD post = {x,y};
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), post);
-}
+

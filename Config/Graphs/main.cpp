@@ -81,6 +81,7 @@ void WriteLocations(std::string ID, std::string lineName,int color,RootObject<St
 	int currentXval = 0;
 	int currentYval = 0;
 	std::string value = "[ " + lineName + " ]";
+	
 	for(int i = 0; i < stationData.lists.size(); i++)
 	{
 		if(stationData.lists[i].LineUniqueID == ID)

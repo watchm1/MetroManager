@@ -1,14 +1,18 @@
 #include "LineManagment.h"
 #include <conio.h>
-#include<string>
+#include <string>
 #include <iostream>
+#include <windows.h>
+#include <iomanip>
+#include <ctime>
+#include <cstdlib>
 using namespace std; 
 
 LineManager::LineManager(){
 	this->GetAllData();
 	h = GetStdHandle(STD_OUTPUT_HANDLE);
 }
-bool LineManager::HatOlustur()
+void LineManager::HatOlustur()
 {
 	
 	system("cls");
@@ -44,11 +48,10 @@ bool LineManager::HatOlustur()
 	cout << endl << "HAT BASARIYLA EKLENDI" << endl;
 	cout << endl << "ANA MENUYE DONULUYOR..." << endl;
 	
-	return true;
+	
 }
 
-bool LineManager::BakimaAl() {
-	system("cls");
+void LineManager::BakimaAl() {
 	cout << "AKTIF HATLAR " << endl << endl;
 	// will check avaliable lines
 	int activeCount = 0;
@@ -60,63 +63,73 @@ bool LineManager::BakimaAl() {
 			if(InputMiddleware::CheckAvaliableLine(this->rootLine.lists[i]))
 			{
 				activeCount +=1;
+				Utils::MoveCursorPoint(20, 6+(i*2));
+				Utils::ChangeColor(this->h, 2);
 				cout<< "[" << i << "] " << "[" << this->rootLine.lists[i].ModelUniqueID  << "] - " << "[ " << this->rootLine.lists[i].ModelName << " ]" << endl;
 			}
 		}
+		Utils::ChangeColor(this->h, 7);
 		if(activeCount > 0)
 		{
-			git:
+			
 			int id;
-			cout << "Bakima almak istediginiz hatti seciniz :";	
+			Utils::MoveCursorPoint(9,22);
+			cout << "Bakima almak istediginiz hatti seciniz :[ ]";	
+			Utils::MoveCursorPoint(50,22);
 			cin >> id;
 			if(this->rootLine.lists[id].isActive  == 1)
 			{
 				this->rootLine.lists[id].isActive = 0;
 				cout << "HAT BAKIMA ALINDI. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
-				return true;	
+					
 			}
+			else if(this->rootLine.lists[id].isActive == 0) {
+				cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
+				
+			}	
 			else {
-				cout << "GECERSIZ GIRIS. TEKRAR DENEYIN" << endl;
-				goto git;
+				cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
+				
 			}
-			
 		}	
 		else {
 			cout << "AKTIF METRO HATTI BULUNAMADI. ANA MENUYE DONULUYOR..." << endl;
 			activeCount = 0;
-			return false;	
+			
 		}
 	}
-	return false;
 }
 
 void LineManager::HatDurumu()
 {
-	system("cls");
+	cout << "HAT DURUMU" << endl;
 	int selected = 0;
 	int counter = 0;
+	
 	for(auto &element: this->rootLine.lists)
 	{
 		if(InputMiddleware::CheckAvaliableLine(element))
 		{
-			SetConsoleTextAttribute(this->h,2); // green color
+			Utils::ChangeColor(this->h,2); // green color
 		}
 		else {
-			SetConsoleTextAttribute(this->h, 4); // red color
+			Utils::ChangeColor(this->h, 4); // red color
 		}
+		Utils::MoveCursorPoint(20, 6+(counter*2));
 		cout<< "[" << counter << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;	
 		counter ++;
 	}
-	SetConsoleTextAttribute(this->h, 7);
-	cout << "Islem yapmak istediginiz hatti seciniz : " ;
-	cin >> selected;
+	Utils::MoveCursorPoint(10,22);
+	Utils::ChangeColor(this->h, 7);
+	cout << "Islem yapmak istediginiz hatti seciniz:[ ] " ;
+	Utils::MoveCursorPoint(50,22);
+	cin>>selected;
 	if(selected < this->rootLine.lists.size())
 	{
 		this->HandleSpecificLine(selected, this->rootLine.lists[selected]);
 	}
-	else 
-	{
-		this->HatDurumu(); 
+	else {
+		cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
 	}
 	
 }
@@ -128,46 +141,61 @@ void LineManager::ActiveStations(Line lineData)
 		// yeni durak ekleme
 		// aktif seferleri görüntüleme 
 		// Durakları yazdırma +	
-		for(auto &element : this->rootStation.lists)
+	
+	for(auto &element : this->rootStation.lists)
+	{
+		if(element.LineUniqueID == lineData.ModelUniqueID)
 		{
-			if(element.LineUniqueID == lineData.ModelUniqueID)
+			if(InputMiddleware::CheckAvaliableStation(element))
 			{
-				if(InputMiddleware::CheckAvaliableStation(element))
-				{
-					SetConsoleTextAttribute(this->h,2);	
-				}	
-				else 
-				{
-					SetConsoleTextAttribute(this->h,4);	
-				}
-				cout << "\t" << "[" << element.ModelUniqueID << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;	
-				
+				Utils::ChangeColor(this->h,2);	
+			}	
+			else 
+			{
+				Utils::ChangeColor(this->h,4);	
 			}
-			SetConsoleTextAttribute(this->h,7);
-			
+			cout << "\t" << "[" << element.ModelUniqueID << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;		
 		}
+		Utils::ChangeColor(this->h,7);
+	}
 }
 void LineManager::ActiveExpedition(Line lineData)
 {
 	system("cls");
-	cout << "\t\t\t EXPEDITIONS" << endl;
-	
+	cout << "\t\t\t\t\t\t EXPEDITIONS" << endl << endl << endl;
+	cout << "\tID\t";
+	cout << "\t\t" << " NEXT STATION \t";
+	cout << "\t\t" << " PASSANGER COUNT";
+	cout << "\t\t" << "  TIME \n";
+	cout << "------------------------------------------------------------------------------------------------------------ \n"; 
+ 	vector<Station> lineStations;
+ 	for(auto &element: this->rootStation.lists)
+ 	{
+ 		if(element.LineUniqueID == lineData.ModelUniqueID)
+		{
+			lineStations.push_back(element); 	
+		}	
+	}
+	srand(time(0));
 	for(auto &element : this->rootSubway.lists)
 	{
 		if(element.CurrentLineUniqueID == lineData.ModelUniqueID)
 		{
 			if(InputMiddleware::CheckAvaliableSubway(element))
 			{
-				SetConsoleTextAttribute(this->h,2);	
+				Utils::ChangeColor(this->h,2);	
 			}
 			else 
 			{
-				SetConsoleTextAttribute(this->h,4);
+				Utils::ChangeColor(this->h,4);
 			}
-			cout << "\t" << "[" << element.ModelUniqueID << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;
-		}		
+			cout << right << "  "<< element.currentExpeditionID;
+			cout << right << "\t\t\t" << "" << lineStations[(int)(rand() % lineStations.size())].ModelName;
+			cout << right << "\t\t\t" << 1000;
+			cout << right << "\t\t\t"<< Utils::CurrentDateTime() << endl;
+		}	
 	}
-	SetConsoleTextAttribute(this->h,7);
+	Utils::ChangeColor(this->h,7);
 }
 void LineManager::HandleSpecificLine(int index, Line lineData)
 {
@@ -194,6 +222,8 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 			case 'n':
 				this->HatDurumu();
 				break;
+			default:
+				break;
 		}
 	}
 }
@@ -203,7 +233,6 @@ void LineManager::LineStatementMenu(Line lineData)
 	cout << "2) SHOW ACTIVE STATIONS" << endl;
 	cout << "3) ADD EXPEDITIONS" << endl;
 	cout << "4) ADD STATIONS" << endl;
-	cout << "5) BACK TO MENU" << endl;
 	
 	char option = getch();
 	switch(option)
@@ -220,8 +249,7 @@ void LineManager::LineStatementMenu(Line lineData)
 		case '4':
 			this->AddStation(lineData);
 			break;
-		case '5':
-			this->HatDurumu();
+		default:
 			break;
 	}
 }

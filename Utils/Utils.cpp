@@ -1,6 +1,6 @@
 #include "Utils.h"
 #include <iostream>
-
+#include <ctime>
 std::string Utils::GenerateUniqueID()
 {
 	std::string letters = "abcdefghijklmnopqrstuvwxyz";
@@ -56,3 +56,18 @@ std::string Utils::ConvertIntToString(int value)
 	ss << value;
 	return ss.str();
 } 
+void Utils::MoveCursorPoint(short x, short y)
+{
+	COORD post = {x,y};
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), post);
+}
+void Utils::ChangeColor(HANDLE h,int color)
+{
+	SetConsoleTextAttribute(h,color);
+}
+std::string Utils::CurrentDateTime()
+{
+	time_t now = time(0);
+	char* date_time = ctime(&now);
+	return std::string(date_time);
+}
