@@ -2,8 +2,13 @@
 Order=20,0,16,8,6,4,3,5,1,19
 Focused=0
 [Editor_0]
+<<<<<<< HEAD
 CursorCol=2
 CursorRow=11
+=======
+CursorCol=3
+CursorRow=9
+>>>>>>> a7167ee90dd6f15e80b91b4ea6d41c66afd49002
 TopLine=1
 LeftChar=1
 [Editor_16]
@@ -20,6 +25,7 @@ LeftChar=1
 CursorCol=2
 CursorRow=31
 TopLine=6
+TopLine=1
 LeftChar=1
 [Editor_6]
 CursorCol=2
@@ -35,6 +41,9 @@ LeftChar=1
 CursorCol=35
 CursorRow=25
 TopLine=13
+CursorCol=19
+CursorRow=6
+TopLine=1
 LeftChar=1
 [Editor_3]
 CursorCol=3
