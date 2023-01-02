@@ -47,7 +47,7 @@ void LineManager::HatOlustur()
 	
 	cout << endl << "HAT BASARIYLA EKLENDI" << endl;
 	cout << endl << "ANA MENUYE DONULUYOR..." << endl;
-	
+	this->SaveData();
 	
 }
 
@@ -95,9 +95,9 @@ void LineManager::BakimaAl() {
 		else {
 			cout << "AKTIF METRO HATTI BULUNAMADI. ANA MENUYE DONULUYOR..." << endl;
 			activeCount = 0;
-			
 		}
 	}
+	this->SaveData();
 }
 
 void LineManager::HatDurumu()
@@ -232,6 +232,7 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 				lineData.isActive = 1;
 				this->rootLine.lists[index] = lineData;
 				cout << "Basariyla aktiflestirildi... Ana menuye donuluyor..." << endl;
+				this->SaveData();
 				break;
 			case 'n':
 				this->HatDurumu();
@@ -296,6 +297,7 @@ void LineManager::AddExpedition(Line lineData)
 	{
 		this->AddExpedition(lineData);
 	}
+	this->SaveData();
 }
 void LineManager::AddStation(Line lineData)
 {
@@ -337,10 +339,12 @@ void LineManager::AddStation(Line lineData)
 		cout << "KOORDINATLAR YANLIS. LUTFEN TEKRAR DENEYIN." << endl;
 		goto git;	
 	}
+	this->SaveData();
 }
 void LineManager::AddNewSubwayPool(Subway subway)
 {
 	this->rootSubway.lists.push_back(subway);
+	this->SaveData();
 }
 void LineManager::DrawAllLinesInCoordinates()
 {
