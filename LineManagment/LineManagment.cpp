@@ -136,7 +136,12 @@ void LineManager::HatDurumu()
 void LineManager::ActiveStations(Line lineData)
 {
 	system("cls");
-	cout << "\t\t\t STATIONS" << endl;
+	cout << "\t\t\t\t\t\t STATIONS" << endl << endl << endl;
+	cout << "\tLINE-ID\t";
+	cout << "\t\t" << " STATION-ID \t";
+	cout << "\t\t" << " STATION NAME";
+	cout << "\t\t" << "  IS ACTIVE \n";
+	cout << "------------------------------------------------------------------------------------------------------------ \n"; 
 		// sefer sayısı arttırma
 		// yeni durak ekleme
 		// aktif seferleri görüntüleme 
@@ -146,18 +151,26 @@ void LineManager::ActiveStations(Line lineData)
 	{
 		if(element.LineUniqueID == lineData.ModelUniqueID)
 		{
+			string value = "";
+			cout <<"    "<< "[ " << element.LineUniqueID << " ]";
+			cout << "\t\t[ " << element.ModelUniqueID  << " ]" ;
+			cout << "\t\t\t[ " << element.ModelName << " ]";
 			if(InputMiddleware::CheckAvaliableStation(element))
 			{
 				Utils::ChangeColor(this->h,2);	
+				value ="ACTIVE";
 			}	
 			else 
 			{
 				Utils::ChangeColor(this->h,4);	
+				value = "DEACTIVE";
 			}
-			cout << "\t" << "[" << element.ModelUniqueID << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;		
+			cout << "\t\t[ " << value << " ]" << endl;
+			Utils::ChangeColor(this->h, 7);
 		}
 		Utils::ChangeColor(this->h,7);
 	}
+	getch();
 }
 void LineManager::ActiveExpedition(Line lineData)
 {
@@ -189,13 +202,14 @@ void LineManager::ActiveExpedition(Line lineData)
 			{
 				Utils::ChangeColor(this->h,4);
 			}
-			cout << right << "  "<< element.currentExpeditionID;
-			cout << right << "\t\t\t" << "" << lineStations[(int)(rand() % lineStations.size())].ModelName;
-			cout << right << "\t\t\t" << 1000;
-			cout << right << "\t\t\t"<< Utils::CurrentDateTime() << endl;
+			cout << right << "[ " <<element.currentExpeditionID << " ]";
+			cout << right << "\t\t\t" << "[ " << lineStations[(int)(rand() % lineStations.size())].ModelName << " ]";
+			cout << right << "\t\t\t  " << "[ " << (int)(rand() % 1000) +1 << " ]";
+			cout << right << "\t\t"<< Utils::CurrentDateTime() << endl;
 		}	
 	}
 	Utils::ChangeColor(this->h,7);
+	getch();
 }
 void LineManager::HandleSpecificLine(int index, Line lineData)
 {
