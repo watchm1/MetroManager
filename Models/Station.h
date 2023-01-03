@@ -12,6 +12,7 @@ struct Station : public BaseModel {
 	int locationY;
 	int is_active;
 };
+//struct:Yapı (Struct) : Birbirleriyle ilişkili değişkenlerin, bir isim altında toplanmasına yapı adı verilir. Yapılar, değişik veri tiplerinde elemanlar içerebilirler ve dosya içinde tutulacak kayıtları oluşturmakta kullanılırlar.
 
 inline void to_json(nlohmann::json& j, const Station& s)
 {

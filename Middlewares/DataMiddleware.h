@@ -5,7 +5,7 @@
 #include "../Models/Line.h"
 #include "../Models/Station.h"
 #include "../Models/Subway.h"
-#include "../Config/Config.h"
+#include "../Config/Config.h"//oluşturulacak olan ıd ler için
 #include "../Utils/JSONHelper.h"
 
 class DataMiddleWare{

@@ -9,13 +9,13 @@
 template<typename T>
 class NOSqlService {
 	private:
-		bool CheckExistence(std::string fileName);
+		bool CheckExistence(std::string fileName);//varlığını kontol et
 	public:		
-		void WriteData(std::string fileName, T objectInstance);
-		T ReadData(std::string fileName);
+		void WriteData(std::string fileName, T objectInstance);//nesne örneği
+		T ReadData(std::string fileName);//verileri oku
 		
 };
-template<typename T>
+template<typename T>//fonksiyon tarafından kullanılan bir veri türü için bir yer tutucu adını gösterir. Bu isim, fonksiyon tanımında kullanılabilir.
 void NOSqlService<T>::WriteData(std::string fileName, T objectInstance)
 {
 	if(this->CheckExistence(fileName))

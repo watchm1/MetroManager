@@ -12,10 +12,10 @@
 #include<unistd.h>
 
 
-void MainPanel::PrintOptions(){
+void MainPanel::PrintOptions(){//yazdırma seçenekleri
 	
 	setlocale(LC_ALL, "Turkish");
-	this->MainTheme();
+	this->MainTheme();//ana tema
 	this->MainMenu();
 }
 void MainPanel::MainTheme()
@@ -27,9 +27,9 @@ void MainPanel::MainTheme()
 	cout << "Console Color: " + this->Color;
 	Utils::MoveCursorPoint(30,3);
 	cout << "METRO MANAGMENT SYSTEM" << endl;
-	Utils::MoveCursorPoint(15,4);
-	cout.width(50);
-	cout.fill('=');
+	Utils::MoveCursorPoint(15,4);//imleç noktasını taşı
+	cout.width(50);//genişliği
+	cout.fill('=');//doldurmak
 	cout << " ";
 	for(int y = 3; y < 20; y++)
 	{
@@ -54,12 +54,12 @@ void MainPanel::MainTheme()
 
 void MainPanel::MainMenu()
 {
-	this->MenuItem[0] = "[1] LINE STATEMENT";
-	this->MenuItem[1] = "[2] ADD LINE";
-	this->MenuItem[2] = "[3] REFACTOR LINE";
-	this->MenuItem[3] = "[4] ADD NEW SUBWAY";
-	this->MenuItem[4] = "[5] SETTINGS";
-	this->MenuItem[5] = "[6] ALL LINES WITH COORDINATES";
+	this->MenuItem[0] = "[1] LINE STATEMENT";//hatlar hakkında bilgi
+	this->MenuItem[1] = "[2] ADD LINE";//hat ekle
+	this->MenuItem[2] = "[3] REFACTOR LINE";//hattı yeniden düzenleme
+	this->MenuItem[3] = "[4] ADD NEW SUBWAY";//yeni metro ekle
+	this->MenuItem[4] = "[5] SETTINGS";//ayarlar
+	this->MenuItem[5] = "[6] ALL LINES WITH COORDINATES";//tüm satırların koordinatları
 	this->MenuItem[6] = "[X] QUIT APPLICATION";
 	for(int menu = 0; menu <= 6; menu++)
 	{
@@ -80,12 +80,12 @@ void MainPanel::HandleOperation(){
 			case '1':
 				this->MainTheme();
 				this->manager.HatDurumu();
-				usleep(3 * this->delayAsMicroSecond);
+				usleep(3 * this->delayAsMicroSecond);//mikro saniye olarak gecikme
 				this->HandleOperation();	
 				break;
 			case '2':
 				this->manager.HatOlustur();
-				Utils::MoveCursorPoint(18,6);
+				Utils::MoveCursorPoint(18,6);//imlec noktasını taşı
 				usleep(3 * this->delayAsMicroSecond);
 				this->HandleOperation();
 				
@@ -106,11 +106,11 @@ void MainPanel::HandleOperation(){
 				this->HandleSettings();
 				break;
 			case '6':
-				this->manager.DrawAllLinesInCoordinates();
+				this->manager.DrawAllLinesInCoordinates();//çizgi koordinatlarını çiz
 				usleep(3* this->delayAsMicroSecond);
 				break;
 			case 'x':
-				this->manager.SaveData();
+				this->manager.SaveData();//veri kaydet
 				exit(1);
 				break;				
 		}
@@ -192,14 +192,14 @@ void MainPanel::AddNewSubway()
 	system("cls");
 	Subway subway;
 	subway.ModelUniqueID = Utils::GenerateUniqueID();
-	cout << "Subway Name : ";
+	cout << "Subway Name : ";//metro adı
 	cin >> subway.ModelName;
-	cout << endl << "Carriage Count : ";
+	cout << endl << "Carriage Count : ";//taşıma sayısı
 	cin >> subway.CarriageCount;
-	cout << endl << "Max Mass: ";
+	cout << endl << "Max Mass: ";//maksimum kütle
 	cin >> subway.MaxMass;
 	subway.isActive = 0;
-	subway.currentExpeditionID = "";
+	subway.currentExpeditionID = "";//mevcut sefer ıd si
 	subway.CurrentLineUniqueID = "";
 	
 	this->manager.AddNewSubwayPool(subway);

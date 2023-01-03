@@ -6,7 +6,7 @@
 #include <string>
 std::string GraphicHelper::exec(std::string command)
 {
-	char buffer[128];
+	char buffer[128];//Buffer parametresine yazdırılabilecek maksimum karakter sayısını gösterir 
 	std::string result = "";
 	FILE* pipe = popen(command.c_str(), "r");
 	if(!pipe)
@@ -14,7 +14,7 @@ std::string GraphicHelper::exec(std::string command)
 		std::cout << "popen failed" << std::endl;
 	}
 	
-	while(!feof(pipe))
+	while(!feof(pipe))//Fonksiyon stream parametresi ile gösterilen dosya akışının sonuna erişilip erişilmediğini kontrol eder
 	{
 		if(fgets(buffer, 128, pipe) != NULL)
 		{

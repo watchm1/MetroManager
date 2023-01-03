@@ -1,7 +1,7 @@
 #include "DataMiddleware.h"
 
 
-RootObject<Line> DataMiddleWare::GetAllDataFromLines()
+RootObject<Line> DataMiddleWare::GetAllDataFromLines()//hatlardan tüm verileri alın
 {
 	return this->lineService.ReadData(this->configs.GetPathOfLines());
 }
@@ -12,7 +12,7 @@ bool DataMiddleWare::WriteAll(RootObject<Line> lineRoot){
 	
 }
 
-RootObject<Subway> DataMiddleWare::GetAllDataFromSubways()
+RootObject<Subway> DataMiddleWare::GetAllDataFromSubways()//trenlerden tüm verileri alın
 {
 	return this->subwayService.ReadData(this->configs.GetPathOfSubways());
 }
@@ -23,9 +23,9 @@ bool DataMiddleWare::WriteAllToSubway(RootObject<Subway> subwayRoot)
 	return true;
 }
 
-RootObject<Station> DataMiddleWare::GetAllDataFromStations()
+RootObject<Station> DataMiddleWare::GetAllDataFromStations()//istasyonlardan tüm verileri alın
 {
-	return this->stationService.ReadData(this->configs.GetPathOfStations());
+	return this->stationService.ReadData(this->configs.GetPathOfStations());//istasyonların yolunu al,configs:yapılandırmalr
 }
 bool DataMiddleWare::WriteAllToStations(RootObject<Station> stationRoot)
 {

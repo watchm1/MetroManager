@@ -7,6 +7,7 @@
 #include "..\Utils\JSONHelper.h"
 #include "..\Config\Config.h"
 #include "..\Middlewares\InputMiddleware.h"
+
 using namespace std;
 class LineManager{
 	private:
@@ -23,12 +24,12 @@ class LineManager{
 		RootObject<Station> rootStation;
 		RootObject<Subway> rootSubway;
 		void LineStatementMenu(Line lineData);
-		void ActiveStations(Line lineData);
-		void ActiveExpedition(Line lineData);
+		void ActiveStations(Line lineData);//aktif istasyonlar
+		void ActiveExpedition(Line lineData);//aktif seferler
 		
 		void GetAllData();
-		void HandleSpecificLine(int index, Line lineData);
-		void AddExpedition(Line lineData);
+		void HandleSpecificLine(int index, Line lineData);//belirli çizgiyi işle
+		void AddExpedition(Line lineData);//sefer ekle
 		void AddStation(Line lineData);
 	public:
 		void SaveData();
@@ -37,8 +38,8 @@ class LineManager{
 		void BakimaAl();
 		void HatDurumu(); 
 		void HatGorseli();
-		void DrawAllLinesInCoordinates();
-		void AddNewSubwayPool(Subway subway);
+		void DrawAllLinesInCoordinates();//koordinatlardaki tüm çizgileri çiz
+		void AddNewSubwayPool(Subway subway);//yeni metroyu havuza ekle
 		
 };
 

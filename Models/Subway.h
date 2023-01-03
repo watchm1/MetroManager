@@ -5,11 +5,11 @@
 #include <nlohmann/json.hpp>
 struct Subway : public BaseModel {
 	
-	string CurrentLineUniqueID;
-	string currentExpeditionID;
+	string CurrentLineUniqueID;//mevcut hat adi si
+	string currentExpeditionID;//mevcut sefer
 	int isActive; // is fixing 
-	int CarriageCount;
-	int MaxMass;	
+	int CarriageCount;//taşıma sayısı
+	int MaxMass;	//maksimum kütle
 };
 
 inline void to_json(nlohmann::json& j, const Subway& s)

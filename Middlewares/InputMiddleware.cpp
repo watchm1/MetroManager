@@ -21,3 +21,4 @@ bool InputMiddleware::CheckAvaliableLine(Line lineData)
 {
 	return lineData.isActive == 1 ? true : false;
 }
+//bool:Bu tür bir değişken ve false değerlerine true sahip olabilir. Koşullu ifadeler türüne bool sahiptir ve bu nedenle türünde bool değerlere sahiptir. Örneğin, i != 0 şimdi değerine false i veya değerine bağlı olarak bulunur true

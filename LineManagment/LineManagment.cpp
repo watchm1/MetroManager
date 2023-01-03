@@ -10,7 +10,7 @@ using namespace std;
 
 LineManager::LineManager(){
 	this->GetAllData();
-	h = GetStdHandle(STD_OUTPUT_HANDLE);
+	h = GetStdHandle(STD_OUTPUT_HANDLE);//handle: bir veri yapısına erişmek için kullanılan anahtarlar
 }
 void LineManager::HatOlustur()
 {
@@ -61,9 +61,9 @@ void LineManager::BakimaAl() {
 		for(int i = 0; i < this->rootLine.lists.size(); i++)
 		{
 			if(InputMiddleware::CheckAvaliableLine(this->rootLine.lists[i]))
-			{
+			{//uygun hattı kontrol edin
 				activeCount +=1;
-				Utils::MoveCursorPoint(20, 6+(i*2));
+				Utils::MoveCursorPoint(20, 6+(i*2));//imleç noktasını taşı
 				Utils::ChangeColor(this->h, 2);
 				cout<< "[" << i << "] " << "[" << this->rootLine.lists[i].ModelUniqueID  << "] - " << "[ " << this->rootLine.lists[i].ModelName << " ]" << endl;
 			}
@@ -119,7 +119,7 @@ void LineManager::HatDurumu()
 		cout<< "[" << counter << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;	
 		counter ++;
 	}
-	Utils::MoveCursorPoint(10,22);
+	Utils::MoveCursorPoint(10,22);//imlaç noktasını taşı
 	Utils::ChangeColor(this->h, 7);
 	cout << "Islem yapmak istediginiz hatti seciniz:[ ] " ;
 	Utils::MoveCursorPoint(50,22);
@@ -127,13 +127,13 @@ void LineManager::HatDurumu()
 	if(selected < this->rootLine.lists.size())
 	{
 		this->HandleSpecificLine(selected, this->rootLine.lists[selected]);
-	}
+	}//belirli çizgeyi işle
 	else {
 		cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
 	}
 	
 }
-void LineManager::ActiveStations(Line lineData)
+void LineManager::ActiveStations(Line lineData)//hat yöneticisi:: aktif istasyonlar
 {
 	system("cls");
 	cout << "\t\t\t\t\t\t STATIONS" << endl << endl << endl;
@@ -175,11 +175,11 @@ void LineManager::ActiveStations(Line lineData)
 void LineManager::ActiveExpedition(Line lineData)
 {
 	system("cls");
-	cout << "\t\t\t\t\t\t EXPEDITIONS" << endl << endl << endl;
-	cout << "\tID\t";
-	cout << "\t\t" << " NEXT STATION \t";
-	cout << "\t\t" << " PASSANGER COUNT";
-	cout << "\t\t" << "  TIME \n";
+	cout << "\t\t\t\t\t\t EXPEDITIONS" << endl << endl << endl;//seferler
+	cout << "\tID\t";//ıd
+	cout << "\t\t" << " NEXT STATION \t";//gelecek istasyon
+	cout << "\t\t" << " PASSANGER COUNT";//yolcu sayısı
+	cout << "\t\t" << "  TIME \n";//zaman
 	cout << "------------------------------------------------------------------------------------------------------------ \n"; 
  	vector<Station> lineStations;
  	for(auto &element: this->rootStation.lists)
@@ -223,7 +223,7 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 	}
 	else 
 	{
-		char selection = getch();
+		char selection = getch();//klavyeden karakter girmemiz gerekirken, karakter girmek yerine ENTER tuşuna basarsak, getchar() fonksiyonu \n karakterini geri verir.
 		cout << "Hatti tekrar aktiflestirmek ister misiniz? Y/N : " ;
 		cin >> selection;
 		switch(selection)
@@ -253,16 +253,16 @@ void LineManager::LineStatementMenu(Line lineData)
 	switch(option)
 	{
 		case '1':
-			this->ActiveExpedition(lineData);
+			this->ActiveExpedition(lineData);//aktif sefer
 			break;
 		case '2':
-			this->ActiveStations(lineData);
+			this->ActiveStations(lineData);//aktif istasyonlar
 			break;
 		case '3':
-			this->AddExpedition(lineData);
+			this->AddExpedition(lineData);//sefer ekleme
 			break;
 		case '4':
-			this->AddStation(lineData);
+			this->AddStation(lineData);//istasyon ekleme
 			break;
 		default:
 			break;
