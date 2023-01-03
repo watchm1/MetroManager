@@ -7,11 +7,8 @@
 #include "..\Utils\JSONHelper.h"
 #include "..\Config\Config.h"
 #include "..\Middlewares\InputMiddleware.h"
-<<<<<<< HEAD
-
-=======
 #include "..\Middlewares\DataMiddleware.h"
->>>>>>> d1b463d7b72404e78ec0b3013cbbdbe669e2dffc
+
 using namespace std;
 class LineManager{
 	private:

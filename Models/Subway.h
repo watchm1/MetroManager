@@ -8,13 +8,8 @@ struct Subway : public BaseModel {
 	string CurrentLineUniqueID;//mevcut hat adi si
 	string currentExpeditionID;//mevcut sefer
 	int isActive; // is fixing 
-<<<<<<< HEAD
-	int CarriageCount;//taşıma sayısı
-	int MaxMass;	//maksimum kütle
-=======
 	int CarriageCount; // vagon sayısı
 	int MaxMass; // maximum ağırlık
->>>>>>> d1b463d7b72404e78ec0b3013cbbdbe669e2dffc
 };
 
 inline void to_json(nlohmann::json& j, const Subway& s)

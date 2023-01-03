@@ -63,11 +63,7 @@ void LineManager::BakimaAl() {
 			if(InputMiddleware::CheckAvaliableLine(this->rootLine.lists[i]))
 			{//uygun hattı kontrol edin
 				activeCount +=1;
-<<<<<<< HEAD
-				Utils::MoveCursorPoint(20, 6+(i*2));//imleç noktasını taşı
-=======
 				Utils::MoveCursorPoint(20, 6+(activeCount*2));
->>>>>>> d1b463d7b72404e78ec0b3013cbbdbe669e2dffc
 				Utils::ChangeColor(this->h, 2);
 				cout<< "[" << i << "] " << "[" << this->rootLine.lists[i].ModelUniqueID  << "] - " << "[ " << this->rootLine.lists[i].ModelName << " ]" << endl;
 			}
@@ -225,10 +221,6 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 	}
 	else 
 	{
-<<<<<<< HEAD
-		char selection = getch();//klavyeden karakter girmemiz gerekirken, karakter girmek yerine ENTER tuşuna basarsak, getchar() fonksiyonu \n karakterini geri verir.
-=======
->>>>>>> d1b463d7b72404e78ec0b3013cbbdbe669e2dffc
 		cout << "Hatti tekrar aktiflestirmek ister misiniz? Y/N : " ;
 		char selection = getch();
 		switch(selection)
