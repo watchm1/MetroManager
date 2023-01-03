@@ -6,7 +6,6 @@ std::string Utils::GenerateUniqueID()
 	std::string letters = "abcdefghijklmnopqrstuvwxyz";
 	std::string numbers = "1234567890";
 	std::string UniqueID = "";
-
 	UniqueID = "";
 	int min = 0;
 	int max = letters.length();
@@ -46,6 +45,7 @@ bool Utils::ContainsInVector(int value, std::vector<int> data)
 		if(element == value)
 		{
 			return true;
+			break;
 		}
 	}
 	return false;

@@ -27,7 +27,7 @@ void LineManager::HatOlustur()
 	
 	newLine.ModelUniqueID = Utils::GenerateUniqueID();
 	newLine.ModelName = HatAdi;
-	newLine.isActive = 1;
+	newLine.isActive = 0;
 	this->rootLine.lists.push_back(newLine);
 	for(int i = 0; i < DurakSayisi ; i ++)
 	{
@@ -63,7 +63,11 @@ void LineManager::BakimaAl() {
 			if(InputMiddleware::CheckAvaliableLine(this->rootLine.lists[i]))
 			{//uygun hattı kontrol edin
 				activeCount +=1;
+<<<<<<< HEAD
 				Utils::MoveCursorPoint(20, 6+(i*2));//imleç noktasını taşı
+=======
+				Utils::MoveCursorPoint(20, 6+(activeCount*2));
+>>>>>>> d1b463d7b72404e78ec0b3013cbbdbe669e2dffc
 				Utils::ChangeColor(this->h, 2);
 				cout<< "[" << i << "] " << "[" << this->rootLine.lists[i].ModelUniqueID  << "] - " << "[ " << this->rootLine.lists[i].ModelName << " ]" << endl;
 			}
@@ -77,19 +81,17 @@ void LineManager::BakimaAl() {
 			cout << "Bakima almak istediginiz hatti seciniz :[ ]";	
 			Utils::MoveCursorPoint(50,22);
 			cin >> id;
-			if(this->rootLine.lists[id].isActive  == 1)
+			if(InputMiddleware::CheckAvaliableLine(this->rootLine.lists[id]))
 			{
 				this->rootLine.lists[id].isActive = 0;
 				cout << "HAT BAKIMA ALINDI. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
-					
 			}
-			else if(this->rootLine.lists[id].isActive == 0) {
+			else if(!InputMiddleware::CheckAvaliableLine(this->rootLine.lists[id])) {
 				cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
 				
 			}	
 			else {
-				cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;
-				
+				cout << "GECERSIZ GIRIS. ANA MENUYE GERI DONUS YAPILIYOR..." << endl;	
 			}
 		}	
 		else {
@@ -215,7 +217,7 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 {
 	system("cls");
 	cout<< "[" << index << "] " << "[" << lineData.ModelUniqueID  << "] - " << "[ " << lineData.ModelName << " ]" << endl;
-	if(lineData.isActive == 1)
+	if(InputMiddleware::CheckAvaliableLine(lineData))
 	{
 		// aktif seferleri göster
 		// sefer ekleme
@@ -223,9 +225,12 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 	}
 	else 
 	{
+<<<<<<< HEAD
 		char selection = getch();//klavyeden karakter girmemiz gerekirken, karakter girmek yerine ENTER tuşuna basarsak, getchar() fonksiyonu \n karakterini geri verir.
+=======
+>>>>>>> d1b463d7b72404e78ec0b3013cbbdbe669e2dffc
 		cout << "Hatti tekrar aktiflestirmek ister misiniz? Y/N : " ;
-		cin >> selection;
+		char selection = getch();
 		switch(selection)
 		{
 			case 'y':
@@ -235,7 +240,6 @@ void LineManager::HandleSpecificLine(int index, Line lineData)
 				this->SaveData();
 				break;
 			case 'n':
-				this->HatDurumu();
 				break;
 			default:
 				break;
@@ -277,7 +281,7 @@ void LineManager::AddExpedition(Line lineData)
 	vector<int> options;
 	for(auto &element: this->rootSubway.lists)
 	{
-		if(!InputMiddleware::CheckAvaliableSubway(element))
+		if(!InputMiddleware::CheckAvaliableSubway(element) && element.currentExpeditionID == "")
 		{
 			cout<< "[" << counter << "] " << "[" << element.ModelUniqueID  << "] - " << "[ " << element.ModelName << " ]" << endl;
 			options.push_back(counter);
@@ -352,13 +356,13 @@ void LineManager::DrawAllLinesInCoordinates()
 }
 void LineManager::GetAllData()
 {	
-	this->rootLine = this->lineService.ReadData(this->config.GetPathOfLines());
-	this->rootStation = this->stationService.ReadData(this->config.GetPathOfStations());
-	this->rootSubway = this->subwayService.ReadData(this->config.GetPathOfSubways());
+	this->rootLine = this->middleware.GetAllDataFromLines();
+	this->rootStation = this->middleware.GetAllDataFromStations();
+	this->rootSubway = this->middleware.GetAllDataFromSubways();
 }	
 void LineManager::SaveData()
 {
-	this->lineService.WriteData(this->config.GetPathOfLines(), this->rootLine);
-	this->stationService.WriteData(this->config.GetPathOfStations(), this->rootStation);
-	this->subwayService.WriteData(this->config.GetPathOfSubways(), this->rootSubway);
+	this->middleware.WriteAll(this->rootLine);
+	this->middleware.WriteAllToStations(this->rootStation);
+	this->middleware.WriteAllToSubway(this->rootSubway);
 }
