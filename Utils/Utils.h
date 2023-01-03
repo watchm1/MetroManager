@@ -29,7 +29,7 @@ template<typename T>
 std::string Utils::ConvertToJson(T data)
 {
 	json jsonData = data;
-	std::string json_as_string = jsonData.dump();
+	std::string json_as_string = jsonData.dump(); //
 	return json_as_string;
 }
 template<typename T>	

@@ -7,16 +7,13 @@
 #include "..\Utils\JSONHelper.h"
 #include "..\Config\Config.h"
 #include "..\Middlewares\InputMiddleware.h"
+#include "..\Middlewares\DataMiddleware.h"
 using namespace std;
 class LineManager{
 	private:
-		//CONFIGURATION
-		Configurations config;
-		// SERVICES
-		NOSqlService<RootObject<Line>> lineService;
-		NOSqlService<RootObject<Subway>> subwayService;
-		NOSqlService<RootObject<Station>> stationService;
 		
+		// SERVICES
+		DataMiddleWare middleware;
 		HANDLE h;
 		// ROOT OBJECTS
 		RootObject<Line> rootLine;

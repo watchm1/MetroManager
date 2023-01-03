@@ -5,7 +5,6 @@
 #include <fstream>
 #include <string>
 #include "Utils.h"
-
 template<typename T>
 class NOSqlService {
 	private:
@@ -13,7 +12,6 @@ class NOSqlService {
 	public:		
 		void WriteData(std::string fileName, T objectInstance);
 		T ReadData(std::string fileName);
-		
 };
 template<typename T>
 void NOSqlService<T>::WriteData(std::string fileName, T objectInstance)
@@ -47,9 +45,7 @@ T NOSqlService<T>::ReadData(std::string fileName)
 		}
 		auto convertedVal = std::string((std::istreambuf_iterator<char>(reader)), std::istreambuf_iterator<char>());
 		reader.close();
-		
 		return Utils::ConvertFromJson<T>(convertedVal);
-		
 	}
 	else 
 	{
@@ -61,12 +57,6 @@ template<typename T>
 bool NOSqlService<T>::CheckExistence(std::string fileName)
 {
 	std::ifstream inFile(fileName.c_str());
-	if(!inFile.good())
-	{
-		return false;
-	}
-	else {
-		return true;
-	}
+	return inFile.good();
 }
 #endif
